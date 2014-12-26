@@ -10,6 +10,8 @@
 *XpandFillForm
  Prefix = A
 *SaveAndClose
-*CheckTable 
- Columns = Prefix,Sequence
- Row[3] = 'A',1
+*XpandProcessRecord
+ Prefix = A
+ Sequence = 1
+
+#IncludeFile .\EndInit.inc

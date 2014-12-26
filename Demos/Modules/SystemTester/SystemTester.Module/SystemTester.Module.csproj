@@ -206,6 +206,7 @@
     <Content Include="FunctionalTests\RunTimeMembers\Config.xml" />
     <Content Include="FunctionalTests\SequenceGenerator\Config.xml" />
     <None Include="FunctionalTests\SequenceGenerator\Init.inc" />
+    <Content Include="FunctionalTests\SequenceGenerator\EndInit.inc" />
     <Content Include="FunctionalTests\SequenceGenerator\Without_Prefix.inc" />
     <Content Include="FunctionalTests\SequenceGenerator\Update_Sequence.inc" />
     <Content Include="FunctionalTests\SequenceGenerator\With_prefix.inc" />
