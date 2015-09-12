@@ -23,6 +23,9 @@ namespace Xpand.Persistent.Base.General.Controllers {
             foreach (var action in Frame.Actions()) {
                 action.Executed -= ActionOnExecuted;
             }
+            var detailView = Frame.View as DetailView;
+            if (detailView != null && detailView.ObjectSpace != null)
+                detailView.ObjectSpace.Reloaded -= ObjectSpace_Reloaded;
         }
 
         protected override void OnFrameAssigned() {
@@ -39,8 +42,16 @@ namespace Xpand.Persistent.Base.General.Controllers {
             var detailView = e.View as DetailView;
             if (detailView != null){
                 detailView.ControlsCreated += ViewOnControlsCreated;
-                detailView.ObjectSpace.Reloaded += (o, args) => UpdateEditableActions(detailView);
+                //detailView.ObjectSpace.Reloaded += ObjectSpace_Reloaded;
             }
+        }
+
+        private void ObjectSpace_Reloaded(object sender, EventArgs e)
+        {
+            var objectSpace = (IObjectSpace)sender;
+            var detailView = objectSpace.Owner as DetailView;
+            if (detailView != null)
+                UpdateEditableActions(detailView);
         }
 
         private void ViewOnControlsCreated(object sender, EventArgs eventArgs) {
@@ -49,7 +60,7 @@ namespace Xpand.Persistent.Base.General.Controllers {
             UpdateView((DetailView)view);
             if (!Application.IsHosted())
                 UpdateEditableActions(view);
-            view.ObjectSpace.Reloaded += (o, args) => UpdateEditableActions(view);
+            view.ObjectSpace.Reloaded += ObjectSpace_Reloaded;
         }
 
         private void ActionOnExecuted(object sender, ActionBaseEventArgs e) {
