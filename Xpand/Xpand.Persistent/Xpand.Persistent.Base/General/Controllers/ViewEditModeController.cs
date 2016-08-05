@@ -1,13 +1,14 @@
-﻿using System;
-using System.ComponentModel;
-using DevExpress.ExpressApp;
+﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.ExpressApp.Editors;
 using DevExpress.ExpressApp.Model;
 using DevExpress.ExpressApp.SystemModule;
+using System;
+using System.ComponentModel;
 using Xpand.Persistent.Base.General.Model;
 
-namespace Xpand.Persistent.Base.General.Controllers {
+namespace Xpand.Persistent.Base.General.Controllers
+{
     public interface IModelDetailViewViewEditMode {
         [Category(AttributeCategoryNameProvider.Xpand)]
         [Description("Control detail view default edit mode")]
@@ -91,6 +92,8 @@ namespace Xpand.Persistent.Base.General.Controllers {
         }
 
         private void UpdateEditableActions(View view) {
+            if(Frame == null)
+                return;
             var modificationsController = Frame.GetController<ModificationsController>();
             modificationsController.SaveAction.Active[typeof(ViewEditModeController).Name] = view.AllowEdit;
             modificationsController.SaveAndCloseAction.Active[typeof(ViewEditModeController).Name] = view.AllowEdit;
